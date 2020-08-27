@@ -1,4 +1,3 @@
 # YAWA
-# YAWA
-# YAWA
-# YAWA
+Yet Another Weather App
+
