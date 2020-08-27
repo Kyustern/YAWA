@@ -1,0 +1,21 @@
+{
+  "name": "nodeweather",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "redis": "cd /redis-6.0.6/src/redis-sever",
+    "dev": "code . && concurrently \"nodemon index.js\" \"npm start --prefix ./betterWeather\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "react-transition-group": "^4.4.1",
+    "redis": "^3.0.2"
+  }
+}
