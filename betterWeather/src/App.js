@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 //Components
 import Header from './components/Header'
@@ -12,7 +12,8 @@ const AppWrapper = styled.div`
     height: 100%;
 `;
 
-function App() {
+const App = () => {
+
     return (
         <AppWrapper>
             <MainProvider>

@@ -35,24 +35,10 @@ const Wrapper = styled.div`
     }
 
     ${this}>div:nth-child(3){
-        animation-delay: -0.7s;
+        animation-delay: -0.5s;
     }
 
 `
 //CL 204 CZ
 
-const Loader = () => {
-    return (
-        <Wrapper>
-            <div>
-                <div>
-                    <div>
-                    </div>
-                </div>
-            </div>
-        </Wrapper>
-    )
-}
-
-
-export default Loader
+export default () => <Wrapper><div/><div/></Wrapper>
