@@ -13,7 +13,7 @@ export const MainProvider = (props) => {
             lat: '43.61'
         })
     const [epoch, setEpoch] = useState('hourly')
-    const [selection, setSelection] = useState('humidity')
+    const [selection, setSelection] = useState('temp')
     const [foreCastObject, setForeCastObject] = useState(null)
     const [showList, setShowList] = useState(false)
 

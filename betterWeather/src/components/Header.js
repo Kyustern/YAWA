@@ -37,7 +37,7 @@ const Header = () => {
     }, [])
 
     const [showList, setShowList] = useState(false)
-    const [showMap, setShowMap] = useState(true)
+    const [showMap, setShowMap] = useState(false)
     const [mapLoaded, setMapLoaded] = useState(false)
     const [isSearchValid, searchBinding] = useInputValidation(emptyCheck, '31000', true)
     const [data, setData] = useState({})

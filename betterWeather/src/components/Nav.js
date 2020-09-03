@@ -27,6 +27,11 @@ const Nav = () => {
 
     const lol = (nomDeLaVille) => {
 
+        if (!nomDeLaVille) {
+            const str = `${Number.parseFloat(currentCoordinates.lat).toPrecision(5)}; ${Number.parseFloat(currentCoordinates.lon).toPrecision(5)}`
+            return str
+        }
+
         switch (nomDeLaVille) {
             case 'Nailloux':
                 return ('Le vrai Sud')
@@ -43,9 +48,7 @@ const Nav = () => {
     return (
         <Wrapper>
             <Desc>
-                {
-                    lol(currentCoordinates.cityName)
-                }
+                {lol(currentCoordinates.cityName)}
             </Desc>
 
             <MenuWrapper>
@@ -101,7 +104,7 @@ const ButtonComponent = ({ selectionProp, setShowMenu, children }) => {
                 fill: 'var(--main-accent-color)'
             } : null}
             // onClick={selection !== selectionProp ? () => { setSelection(selectionProp) } : null}>
-            onClick={() => { handler() }}
+            onClick={() => handler() }
         >
             {children}
         </Button>

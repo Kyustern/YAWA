@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import styled from 'styled-components'
 import Loader from './Loader'
+import {MainContext} from '../contexts/MainContext'
 
 const geoApiOpt = {
     enableHighAccuracy: true,
@@ -8,7 +9,9 @@ const geoApiOpt = {
     maximumAge: 0
 };
 
-const Map = ({ setShowMap, mapLoaded }) => {
+const LocationSelector = ({ setShowMap, mapLoaded }) => {
+
+    const {setCurrentCoordinates} = useContext(MainContext)
 
     const [isMapShown, setIsMapShown] = useState(false)
     const [gettingPos, setGettingPos] = useState(false)
@@ -23,10 +26,6 @@ const Map = ({ setShowMap, mapLoaded }) => {
         streetViewControl: false,
         rotateControl: false,
         fullscreenControl: false
-    }
-
-    const validationMarkHandler = () => {
-
     }
 
     const compassButtonHandler = () => {
@@ -87,8 +86,24 @@ const Map = ({ setShowMap, mapLoaded }) => {
         ctx.stroke()
     }
 
-    const drawCoordinates = (latLng) => {
-        
+    const drawCoordinates = (mapInstance) => {
+        const {lat, lng} = mapInstance.center
+        const ctx = crosshairRef.current.getContext('2d')
+        const width = crosshairRef.current.width
+        ctx.font = 'normal 1rem inherit'
+        ctx.clearRect(0, 0, width/2 - 10, 31)
+        ctx.strokeText(lat(), 0, 15)
+        ctx.strokeText(lng(), 0, 30)
+    }
+
+    const validationMarkHandler = () => {
+        const {lat, lng} = mapInstance.center
+        setCurrentCoordinates({
+            cityName: '',
+            lon: lng(),
+            lat: lat()
+        })
+        setShowMap(false)
     }
 
     useEffect(() => {
@@ -103,13 +118,12 @@ const Map = ({ setShowMap, mapLoaded }) => {
     }, [mapLoaded])
 
     useEffect(() => {
-        if (isMapShown) {
+        if (mapInstance) {
             drawCrosshair()
-            drawCoordinates()
-            mapInstance.addListener('center_changed', drawCoordinates())
-
+            drawCoordinates(mapInstance)
+            mapInstance.addListener('center_changed', () => drawCoordinates(mapInstance))
         }
-    }, [isMapShown])
+    }, [mapInstance])
 
     return (
         <Background>
@@ -197,4 +211,4 @@ const Wrapper = styled.div`
     border-radius: 10px;
 `
 
-export default Map
+export default LocationSelector
